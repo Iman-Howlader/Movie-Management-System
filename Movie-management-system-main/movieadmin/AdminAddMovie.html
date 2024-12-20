@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Management</title>
+    <link rel="stylesheet" href="AdminAddMovie.css">
+</head>
+<body>
+    <div class="container">
+        <button class="admin-btn">Admin</button>
+        <h1>Movie Management</h1>
+        <h2>Add Movie</h2>
+        <form action="AdminAddMovie.php" method="post" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br><br>
+
+
+
+
+
+
+            
+            <label for="genre">Genre:</label>
+           <!-- <input type="text" id="genre" name="genre" required><br><br>-->
+
+            <select  name="genre" id="director">
+                <?php
+              
+                $genres = mysqli_query($conn, "SELECT * FROM genres");
+                while ($genre = mysqli_fetch_assoc($genres)) {
+                    echo "<option value='" . $genre['genre_name'] . "'>" . $genre['genre_name'] . "</option>";
+                }
+                ?>
+                
+      <!--
+                <label for="director">Director:</label>
+                <input type="text" id="director" name="director" required><br><br>
+    
+       -->
+                
+    </select><br><br> 
+            
+
+            
+
+            <label for="director_id">Director:</label>
+            <select  name="director" id="director">
+            <?php
+            // assume you have a query to retrieve all directors from the directors table
+            $directors = mysqli_query($conn, "SELECT * FROM directors");
+            while ($director = mysqli_fetch_assoc($directors)) {
+                echo "<option value='" . $director['Name'] . "'>" . $director['Name'] . "</option>";
+            }
+            ?>
+            
+  <!--
+            <label for="director">Director:</label>
+            <input type="text" id="director" name="director" required><br><br>
+
+   -->
+            
+</select><br><br>   
+            <label for="release_date">Release Date:</label>
+            <input type="date" id="release_date" name="release_date" required><br><br>
+            
+            <label for="duration">Duration:</label>
+            <input type="text" id="duration" name="duration" placeholder="hours:minutes:seconds" required><br><br>
+
+
+
+            
+            <label for="language">Language:</label>
+           <!-- <input type="text" id="language" name="language" required><br><br>-->
+           <select  name="language" id="language">
+            <?php
+          
+            $languages = mysqli_query($conn, "SELECT * FROM languages");
+            while ($language = mysqli_fetch_assoc($languages)) {
+                echo "<option value='" . $language['language_name'] . "'>" . $language['language_name'] . "</option>";
+            }
+            ?>
+            
+  <!--
+            <label for="director">Director:</label>
+            <input type="text" id="director" name="director" required><br><br>
+
+   -->
+            
+</select><br><br> 
+
+
+
+
+            
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+            
+            <label for="budget">Budget:</label>
+            <input type="number" id="budget" name="budget" required><br><br>
+
+            <label for="Upload Movie Poster">Upload image:</label>
+            <input type ="file" name="upfile"><br><br>
+            
+        
+            <input type="button" value="Back" onclick="history.back()" class="back-btn">
+            <input type="submit" value="Add Movie" name="submit" >
+        </form>
+    </div>
+</body>
+</html>

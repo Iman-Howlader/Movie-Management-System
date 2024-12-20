@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Red Alert</title>
+    <style>
+        /* CSS for the red alert modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: red;
+            color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid darkred;
+            border-radius: 5px;
+            width: 80%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<button id="alertButton">Click me for Red Alert!</button>
+
+<div id="redAlertModal" class="modal">
+    <div class="modal-content">
+        <p>This is a basic alert message.</p>
+        
+        <button onclick="hideRedAlert()">OK</button>
+    </div>
+</div>
+
+<script>
+    // JavaScript to handle button click and show red alert modal
+    document.getElementById("alertButton").addEventListener("click", function() {
+        document.getElementById("redAlertModal").style.display = "block";
+    });
+
+    // Function to hide the red alert modal
+    function hideRedAlert() {
+        document.getElementById("redAlertModal").style.display = "none";
+    }
+</script>
+
+</body>
+</html>

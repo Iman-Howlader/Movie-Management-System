@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Movie</title>
+    <link rel="stylesheet" href="AdminUpdateMovie.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Update Movie</h1>
+        <form action="theaterAdminUpdateMovie.php" method="post" enctype="multipart/form-data">
+
+            <?php
+            include '../connection.php';
+
+            // Retrieve MovieID from URL parameter
+            if(isset($_GET['MovieID'])){
+                $movieID = $_GET['MovieID'];
+
+                // Fetch movie details from the database
+                $sql = "SELECT * FROM movie WHERE MovieID=$movieID";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    // Display fields for editing movie information
+                    echo "<input type='hidden' name='movieID' value='$movieID'>";
+                    echo "<label for='title'>Title:</label>";
+                    echo "<input type='text' id='title' name='title' value='" . $row['Title'] . "' required><br><br>";
+
+                    echo "<label for='genre'>Genre:</label>";
+                    echo "<input type='text' id='genre' name='genre' value='" . $row['Genre'] . "' required><br><br>";
+
+                    echo "<label for='release_date'>Release Date:</label>";
+                    echo "<input type='date' id='release_date' name='release_date' value='" . $row['Release_date'] . "' required><br><br>";
+
+                    echo "<label for='duration'>Duration:</label>";
+                    echo "<input type='text' id='duration' name='duration' value='" . $row['Duration'] . "' required><br><br>";
+
+                    echo "<label for='language'>Language:</label>";
+                    echo "<input type='text' id='language' name='language' value='" . $row['Language'] . "' required><br><br>";
+
+                    echo "<label for='description'>Description:</label><br>";
+                    echo "<textarea id='description' name='description' rows='4' cols='50' required>" . $row['Description'] . "</textarea><br><br>";
+
+                    echo "<label for='budget'>Budget:</label>";
+                    echo "<input type='number' id='budget' name='budget' value='" . $row['Budget'] . "' required><br><br>";
+
+                    echo "<input type='hidden' name='previous_photo' value='" . $row['Image'] . "'>";
+
+                    $image_filename = $row["Image"];
+                    // Generating the image path
+                    $image_path = "images/" . $image_filename;
+                    // Displaying the image
+                    echo "<img id='preview_image' src='" . $image_path . "' alt='" . $row["Title"] . "' width='100'><br><br>";
+
+                    echo "<input type='file' name='upfile' id='upfile' onchange='previewImage(event)'><br><br>";
+                    
+                    echo "<input type='submit' name='submit' value='Update Movie'>";
+                }
+            }
+            ?>
+
+        </form>
+    </div>
+
+    <script>
+        // Function to preview selected image live in the form  with javascript 
+        function previewImage(event) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var img = document.getElementById('preview_image');
+                img.src = reader.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+</body>
+</html>

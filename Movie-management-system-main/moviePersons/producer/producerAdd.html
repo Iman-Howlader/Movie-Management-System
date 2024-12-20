@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Producer Information</title>
+    <link rel="stylesheet" href="producerAdd.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Add Producer Information</h2>
+        <form action="producerAdd.php" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <input type="text" name="company" placeholder="Company" required>
+           
+            <input type="url" name="website" placeholder="Website" >
+            
+            <!-- For Profile Picture Upload -->
+            
+
+            <button type="submit" name="submit">Add Producer</button>
+        </form>
+        <p>Already have an account? <a href="../login/login.php">Login</a></p>
+    </div>
+
+    <!-- live image preview in form -->
+    <script>
+        function previewImage(event) {
+            var preview = document.getElementById('preview');
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function() {
+                preview.src = reader.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>

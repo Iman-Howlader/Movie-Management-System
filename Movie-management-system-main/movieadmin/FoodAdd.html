@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Management - Add Food</title>
+    <link rel="stylesheet" href="FoodAdd.css">
+    <style>
+        #preview-container {
+            text-align: center;
+        }
+
+        #preview {
+            display: inline-block;
+            max-width: 200px;
+            max-height: 200px;
+            border: 2px solid #ccc;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Food</h1>
+        <form action="FoodAdd.php" method="post" enctype="multipart/form-data">
+            <label for="foodName">Food Name:</label>
+            <input type="text" id="foodName" name="food_name" required><br><br>
+            
+            <label for="foodPrice">Food Price:</label>
+            <input type="text" id="foodPrice" name="food_price" required><br><br>
+            
+            <label for="foodCategory">Food Category:</label>
+            <select id="foodCategory" name="food_category" required>
+                <option value="combo">Combo</option>
+                <option value="fastfood">Fast Food</option>
+                <option value="drinks">Drinks</option>
+                <option value="others">Others</option>
+            </select><br><br>
+
+            <label for="availability">Availability:</label>
+            <select id="availability" name="availability">
+                <option value="available">Available Now</option>
+                <option value="not_available">Not Available Now</option>
+            </select><br><br>
+
+            <div id="preview-container">
+                <label for="foodImage">Food Image:</label>
+                <br>
+                <img id="preview" src="#" alt="Image Preview" style="display: none;"><br><br>
+            </div>
+            
+            <input type="file" id="foodImage" name="food_image" accept="image/*" onchange="previewImage(event)" required><br><br>
+            
+            <input type="submit" value="Add Food" name="submit">
+        </form>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            var preview = document.getElementById('preview');
+            preview.style.display = 'inline-block';
+            preview.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+</body>
+</html>

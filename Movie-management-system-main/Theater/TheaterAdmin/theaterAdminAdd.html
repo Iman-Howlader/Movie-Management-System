@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Management</title>
+    <link rel="stylesheet" href="theaterAdminAdd.css">
+</head>
+<body>
+    <div class="container">
+        <button class="admin-btn">Admin</button>
+        <h1>Movie Management</h1>
+        <h2>Add Movie</h2>
+        <form action="theaterAdminAdd.php" method="post" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br><br>
+            
+            <label for="category">Category:</label>
+            <!--<input type="text" id="category" name="category" required><br><br> -->
+            <select  name="category" id="category">
+                <?php
+                
+                $categorys = mysqli_query($conn, "SELECT * FROM hallmoviecategory");
+                while ($category = mysqli_fetch_assoc($categorys)) {
+                    echo "<option value='" . $category['category_name'] . "'>" . $category['category_name'] . "</option>";
+                }
+                ?>
+                
+                
+    </select><br><br>   
+            
+            <label for="startTime">Start Time:</label>
+            <input type="time" id="startTime" name="startTime" required><br><br>
+            
+            <label for="endTime">End Time:</label>
+            <input type="time" id="endTime" name="endTime" required><br><br>
+            
+            <label for="location">Location:</label>
+            <select id="location" name="location[]" multiple required>
+                <option value="Bashundhara City">Bashundhara City</option>
+                <option value="Jamuna Future Park">Jamuna Future Park</option>
+                <option value="Simanto Square">Simanto Square</option>
+                <option value="North South University">North South University</option>
+                <option value="Mirpur">Mirpur</option>
+            </select><br><br>
+            
+            <label for="ticketPrice">Ticket Price:</label>
+            <input type="number" id="ticketPrice" name="ticketPrice" min="0" required><br><br>
+        
+            <input type="button" value="Back" onclick="history.back()" class="back-btn">
+            <input type="submit" value="Add Movie" name="submit">
+        </form>
+    </div>
+</body>
+</html>

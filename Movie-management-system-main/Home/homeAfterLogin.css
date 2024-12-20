@@ -1,0 +1,307 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'open sans', sans-serif;
+}
+
+:root {
+    --text-color: #fff;
+    --bg-color: #000000;
+    --main-color: #04f929;
+    --h1-font: 6rem;
+    --h2-font: 3rem;
+    --p-font: 1rem;
+    --card-color: #137db1;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    background: transparent;
+    padding: 30px 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.5s ease;
+}
+
+.logo {
+    font-size: 33px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+span {
+    color: var(--main-color);
+}
+
+.navbar {
+    display: flex;
+}
+
+.navbar a {
+    color: var(--text-color);
+    font-size: var(--p-font);
+    font-weight: bold;
+    margin: 15px 22px;
+    transition: all 0.5s ease;
+}
+
+.navbar a:hover {
+    color: var(--main-color);
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    margin-right: 20px;
+}
+
+.search-bar input[type=text] {
+    padding: 8px;
+    border: none;
+    font-size: 17px;
+    border-radius: 5px;
+}
+
+.submit-button button {
+    background-color: var(--main-color);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.submit-button button:hover {
+    background-color: var(--main-color);
+}
+
+.login-button {
+    background-color:var(--main-color);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 17px;
+    text-decoration: none; 
+    display: flex;
+    align-items: center;
+}
+
+.login-button i {
+    margin-right: 5px; 
+}
+
+.login-button img {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    margin-right: 5px; 
+    background:none;
+}
+
+
+/* Front Image Slide */
+
+.imgSlider {
+    width: 75%;
+    height: 400px;
+    top: 100px;
+    left: 11%;
+    position: relative;
+    background-image: url("images/SlideShow/serge-kutuzov-meqVd5zwylI-unsplash.jpg");
+    background-size: 100% 100%;
+    box-shadow: rgba(149, 157, 165, 0.2)0px 8px 24px;
+    animation: ChangeImage 20s linear infinite;
+}
+
+@keyframes ChangeImage {
+    0% {
+        background-image: url("images/SlideShow/florian-klauer-mk7D-4UCfmg-unsplash.jpg");
+    }
+
+    25% {
+        background-image: url("images/SlideShow/serge-kutuzov-meqVd5zwylI-unsplash.jpg");
+    }
+
+    50% {
+        background-image: url("images/SlideShow/hector-reyes-PXjQaGxi4JA-unsplash.jpg");
+    }
+
+    75% {
+        background-image: url("images/SlideShow/jakob-owens-CiUR8zISX60-unsplash.jpg");
+    }
+
+    100% {
+        background-image: url("images/SlideShow/nate-johnston-6ajf6BAyYt4-unsplash.jpg");
+    }
+}
+
+
+
+/* Card CSS */
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.5s ease;
+    width: calc(5 * (250px + 20px));
+}
+
+.card {
+    width: 250px;
+    /* Width of each card */
+    height: 360px;
+    background-color: var(--card-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+}
+
+.card img {
+    width: 250px;
+    height: 200px;
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.card-content h3 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.card-content p {
+    color: #000000;
+    font-size: 15px;
+    line-height: 1.3;
+}
+
+.card-content .btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 16px;
+    color: #fff;
+}
+
+.prevBtn,
+.nextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.prevBtn {
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.nextBtn {
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+/* Hide radio buttons */
+input[type="radio"] {
+    display: none;
+}
+
+/* Footer Container */
+.footerContainer {
+    background-color: var(--bg-color);
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 20px;
+    padding-left: 100px;
+}
+
+.socialicons {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0px;
+}
+
+.socialicons a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 50%;
+}
+
+.socialicons a i {
+    font-size: 2em;
+    color: #000;
+    opacity: 0.9;
+}
+
+.socialicons a:hover {
+    background-color: black;
+    transition: 0.5s;
+}
+
+.socialicons a:hover i {
+    background-color: var(--text-color);
+    transition: 0.5s;
+}
+
+.footerNav {
+    margin: 30px 0;
+
+}
+
+.footerNav ul {
+    display: flex;
+    justify-content: center;
+
+}
+
+.footerNav ul li a {
+    color: var(--text-color);
+    margin: 20px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.footerNav ul li a:hover {
+    color: var(--main-color)
+}

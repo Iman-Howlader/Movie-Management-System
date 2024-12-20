@@ -1,0 +1,69 @@
+<!-- FoodUpdate.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Management - Update Food</title>
+    <link rel="stylesheet" href="FoodUpdate.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Update Food</h1>
+        <?php
+            include '../connection.php'; // Include database connection
+            if(isset($_GET['food_id'])) {
+                $food_id = $_GET['food_id'];
+                $sql = "SELECT * FROM foods WHERE FoodID = '$food_id'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    ?>
+                    <form action="FoodUpdate.php" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="food_id" value="<?php echo $row['FoodID']; ?>">
+                        <input type="hidden" name="current_image" value="<?php echo $row['FoodImage']; ?>">
+                        <label for="foodName">Food Name:</label>
+                        <input type="text" id="foodName" name="food_name" value="<?php echo $row['FoodName']; ?>" required><br><br>
+                        
+                        <label for="foodPrice">Food Price:</label>
+                        <input type="text" id="foodPrice" name="food_price" value="<?php echo $row['FoodPrice']; ?>" required><br><br>
+                        
+                        <label for="foodCategory">Food Category:</label>
+                        <select id="foodCategory" name="food_category" required>
+                            <option value="combo" <?php if($row['FoodCategory'] == 'combo') echo 'selected'; ?>>Combo</option>
+                            <option value="fastfood" <?php if($row['FoodCategory'] == 'fastfood') echo 'selected'; ?>>Fast Food</option>
+                            <option value="drinks" <?php if($row['FoodCategory'] == 'drinks') echo 'selected'; ?>>Drinks</option>
+                            <option value="others" <?php if($row['FoodCategory'] == 'others') echo 'selected'; ?>>Others</option>
+                        </select><br><br>
+
+                        <select id="availability" name="availability">
+                            <option value="available" <?php if($row['FoodStatus'] == 1) echo 'selected'; ?>>Available Now</option>
+                            <option value="not_available" <?php if($row['FoodStatus'] == 0) echo 'selected'; ?>>Not Available Now</option>
+                        </select><br><br>
+
+                        <label for="foodImage">Food Image:</label><br>
+                        <img id="preview" src="foodimages/<?php echo $row['FoodImage']; ?>" alt="Current Image"><br><br>
+                        <input type="file" id="foodImage" name="food_image" accept="image/*" onchange="previewImage(event)"><br><br>
+
+                        
+                        <input type="submit" name="submit" value="Update">
+                    </form>
+                    <?php
+                } else {
+                    echo "No food item found with the given ID.";
+                }
+            } else {
+                echo "Food ID not provided.";
+            }
+          
+        ?>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            var preview = document.getElementById('preview');
+            preview.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+</body>
+</html>
